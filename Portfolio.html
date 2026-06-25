@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yoon Yeochan — Designer · Planner · Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Condiment&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg:    '#010828',
+          cream: '#EFF4FF',
+          neon:  '#6FFF00',
+        },
+        fontFamily: {
+          grotesk:   ['Anton', 'PyeojinGothic', 'Impact', 'sans-serif'],
+          condiment: ['Condiment', 'cursive'],
+          mono:      ['JetBrains Mono', 'PyeojinGothic', 'ui-monospace', 'monospace'],
+        },
+        maxWidth: {
+          shell: '1831px',
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  @font-face {
+    font-family: 'PyeojinGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Light.woff2') format('woff2');
+    font-weight: 300; font-display: swap;
+  }
+  @font-face {
+    font-family: 'PyeojinGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Regular.woff2') format('woff2');
+    font-weight: 400; font-display: swap;
+  }
+  @font-face {
+    font-family: 'PyeojinGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Bold.woff2') format('woff2');
+    font-weight: 700; font-display: swap;
+  }
+  html, body { background: #010828; color: #EFF4FF; }
+  body { font-family: 'JetBrains Mono', 'PyeojinGothic', ui-monospace, monospace; -webkit-font-smoothing: antialiased; }
+
+  /* ── Liquid Glass ──────────────────────────────────────────── */
+  .liquid-glass {
+    background: rgba(255, 255, 255, 0.01);
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: none;
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .liquid-glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.4px;
+    background: linear-gradient(
+      180deg,
+      rgba(255,255,255,0.45) 0%,
+      rgba(255,255,255,0.15) 20%,
+      rgba(255,255,255,0)    40%,
+      rgba(255,255,255,0)    60%,
+      rgba(255,255,255,0.15) 80%,
+      rgba(255,255,255,0.45) 100%
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Text-only variant — keep the glass border, drop the fill so video shows through */
+  .glass-card {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+  .glass-card p,
+  .glass-card span,
+  .glass-card h3 {
+    font-weight: 700;
+    text-shadow: 0 1px 12px rgba(0,0,0,0.85), 0 0 3px rgba(0,0,0,0.7);
+  }
+
+  /* ── Texture overlay ───────────────────────────────────────── */
+  .texture-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    background-image: url('https://www.transparenttextures.com/patterns/noisy.png');
+    background-size: cover;
+    mix-blend-mode: lighten;
+    opacity: 0.6;
+  }
+
+  /* ── Misc ──────────────────────────────────────────────────── */
+  .heading-tight { line-height: 0.92; letter-spacing: 0.005em; }
+  .accent-cursive { color: #6FFF00; font-family: 'Condiment', cursive; font-weight: 400; }
+  ::selection { background: #6FFF00; color: #010828; }
+
+  .neon-underline {
+    background: linear-gradient(180deg, transparent 60%, #6FFF00 60%, #6FFF00 80%, transparent 80%);
+  }
+
+  /* Faint marquee text */
+  .faint-row {
+    color: rgba(239, 244, 255, 0.06);
+    font-family: 'Anton', Impact, sans-serif;
+    white-space: nowrap;
+  }
+
+  /* Smooth scroll for nav */
+  html { scroll-behavior: smooth; }
+
+  /* Hide scrollbar in nav pill */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  /* Page reveal after preload */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-in { animation: fadeInUp 0.8s ease-out both; }
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-bg text-cream overflow-x-hidden">
+
+<div class="texture-overlay"></div>
+<div id="root"></div>
+
+<script type="text/babel" data-presets="react">
+const { useState, useEffect } = React;
+
+/* ─────────────────────────────────────────────────────────────
+   TEXT CONSTANTS — edit here to swap CV
+   ───────────────────────────────────────────────────────────── */
+const PROFILE = {
+  name: 'YOON YEOCHAN',
+  shortName: 'Yeochan',
+  role: 'Designer · Planner · Developer',
+  institution: 'Industrial-Field Developer',
+  field: 'designer · planner · developer',
+};
+
+const NAV = [
+  { id: 'home',     label: 'HOME' },
+  { id: 'about',    label: 'ABOUT' },
+  { id: 'research', label: 'WORK' },
+  { id: 'contact',  label: 'CONTACT' },
+];
+
+const SOCIAL = [
+  { kind: 'mail',   href: 'mailto:ducks0413@naver.com',   label: 'Email' },
+  { kind: 'github', href: 'https://github.com/chanchaning', label: 'GitHub' },
+  { kind: 'blog',   href: 'https://chanchaning.inblog.io/', label: 'Blog' },
+];
+
+const HERO_HEADING = [
+  'BRIDGING COMPLEX',
+  'DOMAINS WITH',
+  'INTUITIVE ARCHITECTURE.',
+];
+
+const ABOUT_STATEMENT =
+  '산업 현장을 이해하는 디자이너, 기획자, 그리고 개발자. 현장과 스크린 사이의 간극을 좁힙니다. 실제 작업이 이루어지는 그곳에서, \u2018진짜로 작동하는\u2019 소프트웨어를 기획하고 디자인하며 구축합니다.';
+
+const KEYWORD_ROWS = [
+  'DESIGN / PLANNING / DEVELOPMENT / INDUSTRIAL FIELD / UX',
+  'FRONTEND / PRODUCT / PROTOTYPING / REAL-WORLD SOFTWARE',
+];
+
+const PROJECTS = [
+  {
+    no: '08',
+    title: '산업 AI 안전관리 시스템',
+    org: '한국전력공사(KEPCO) · 와플랩',
+    period: '2026.01 — 현재',
+    role: 'FE 아키텍처 설계 · AI/IoT 통합 인터페이스 개발 총괄',
+    desc: '현장 작업자가 위험 요소를 즉각 보고·질의하는 지능형 AI 챗봇과, AI CCTV·MQTT 연계 실시간 이상 징후 탐지 알림 체계를 구축. React Flow로 복잡한 센서 네트워크를 한눈에 보는 토폴로지 맵 개발.',
+    stack: ['React', 'TypeScript', 'React Flow', 'MQTT'],
+  },
+  {
+    no: '06',
+    title: 'OilfieldNEX 미국 유전 관리 시스템',
+    org: '울랄라랩',
+    period: '2024.06 — 2025',
+    role: 'Flutter WebView 전환 총괄 · Web Vue3 FE 총괄',
+    desc: 'Flutter 크로스 플랫폼으로 Android·iOS를 총괄 개발. 네이티브 대신 WebView로 감싸 개발해 2월 출시 완료.',
+    stack: ['Flutter', 'Vue3', 'WebView'],
+  },
+  {
+    no: '07',
+    title: '일진 하이솔루스 툴앤웍스',
+    org: '울랄라랩',
+    period: '2024.12 — 2025.02',
+    role: '아트라스 콥코 공구·소켓 통신 공정 관리 툴 제작',
+    desc: '수소탱크를 확실하게 결합하는 공정 관리 툴 개발. 연 매출 1억 이상, 총 5개 공정에서 필수로 사용되는 시스템을 완성.',
+    stack: ['Vue3', 'JavaScript'],
+  },
+  {
+    no: '05',
+    title: '포어시스 해양 폐기물 연구 과제',
+    org: '포어시스 · 울랄라랩',
+    period: '2023.06 — 2024.06',
+    role: '화면 설계 · 서비스 개발',
+    desc: '해양 폐기물 처리 현황을 실시간 추적하는 대시보드 구축. SSE 실시간 데이터 수집·POP 연동으로 현장 작업자가 폐기물 데이터를 쉽게 파악.',
+    stack: ['Vue3', 'JavaScript', 'Sass'],
+  },
+  {
+    no: '03',
+    title: '동성화인텍 설비 가동 현황',
+    org: '동성화인텍 · 울랄라랩',
+    period: '2023.01 — 2024.06',
+    role: '화면 설계 · 서비스 개발',
+    desc: '스마트 공장을 위해 설비 가동 상태·온도를 실시간 모니터링하여 화재 위험 예방과 작업 효율 제고. 데이터 시각화와 엑셀 다운로드로 현장 관리자의 활용성 증대.',
+    stack: ['Vue3', 'JavaScript', 'Sass'],
+  },
+  {
+    no: '04',
+    title: '사내 영업 관리 시스템',
+    org: '울랄라랩',
+    period: '2023.04 — 2024.06',
+    role: '화면 설계 · 서비스 개발',
+    desc: '영업 기회 추적·계약 성사 지원 시스템 개발. 권한 관리, 로그인, 영업 목표 설정 등 전반 기능을 구현하고 접근성 향상을 위한 권한 구조 개선.',
+    stack: ['Vue3', 'JavaScript', 'Sass'],
+  },
+  {
+    no: '02',
+    title: '인터배터리 2023 전시 대시보드',
+    org: '인터배터리 2023 · 울랄라랩',
+    period: '2023.07 — 2023.08',
+    role: '화면 설계 · 서비스 개발',
+    desc: '리튬 배터리 IoT 기기 데이터를 활용한 전시회 맞춤형 대시보드 구축. 시각적 요소 강화와 실시간 알림으로 예비 고객에게 효과적으로 정보 제공.',
+    stack: ['Vue3', 'JavaScript', 'Sass'],
+  },
+  {
+    no: '01',
+    title: '명지대 자율주행 차량 모니터링',
+    org: '명지대학교 · 이지트래픽',
+    period: '2022.02 — 2023.03',
+    role: '화면 설계 · 서비스 기획 · 개발',
+    desc: '자율주행 차량 데이터와 교차로 데이터를 결합해 실시간 교통 흐름·신호 주기를 분석. 신호 체계에 맞춰 차량을 추적하고 향후 교통 관리 개선 방안을 제시.',
+    stack: ['Vue2', 'React.js', 'Node.js'],
+  },
+];
+
+const EDUCATION = [
+  {
+    school: '한세대학교',
+    type: '4년제 · 졸업',
+    major: '실내건축디자인',
+    period: '2017.03 — 2019.03',
+    meta: ['경기', '주간', '학점 3.4 / 4.5', '졸업작품'],
+  },
+  {
+    school: '계원예술대학교',
+    type: '2·3년제 · 졸업',
+    major: '유아용품디자인',
+    period: '2012.03 — 2015.03',
+    meta: ['경기', '주간'],
+  },
+  {
+    school: '용호고등학교',
+    type: '졸업',
+    major: '예체능계 디자인',
+    period: '2008.02 — 2011.03',
+    meta: [],
+  },
+];
+
+const AWARDS = [
+  { title: '제12회 공간디자인대전 특선', org: '인테르니 앤 데코', date: '2019.12' },
+  { title: 'KVMA 입선', org: '한국 비주얼머천다이징 협회', date: '2019.12' },
+  { title: '해양경찰청 UCC 공모전 우수상', org: '해양경찰청', date: '2018.11' },
+];
+
+const MILITARY = {
+  status: '군필 · 만기전역',
+  detail: '의경 / 병장',
+  period: '2017.05 — 2019.04',
+};
+
+const FEATURED = [
+  {
+    title:   'DESIGN',
+    tag:     'UI · UX · Brand',
+    label:   'ROLE 01',
+    value:   'PRODUCT DESIGN',
+    video:   'uploads/제자리에서_방방_뛰는_자연스러운_케릭터_영상이_필요해-77f25d7f.mp4',
+    link:    'design.html',
+  },
+  {
+    title:   'PLANNING',
+    tag:     'Product · Strategy',
+    label:   'ROLE 02',
+    value:   'PRODUCT PLANNING',
+    video:   'uploads/이번엔_뛰지말고_서서_손흔들고_손에_들고있는걸_보고_손.mp4',
+    link:    'planning.html',
+  },
+  {
+    title:   'DEVELOPMENT',
+    tag:     'Frontend · Field',
+    label:   'ROLE 03',
+    value:   'SHIPPING CODE',
+    video:   'uploads/The_cute_D_character_enthusia.mp4',
+    link:    'dev.html',
+  },
+];
+
+const VIDEO_HERO  = 'uploads/intro.mp4';
+const VIDEO_ABOUT = 'uploads/KakaoTalk_20260623_213152335.mp4';
+const VIDEO_CTA   = 'uploads/아웃트로_영상이야_클로우즈_아웃되면서_하나씩_똥똥똥_나.mp4';
+
+/* ─────────────────────────────────────────────────────────────
+   ICONS — minimal stroke set (lucide-style)
+   ───────────────────────────────────────────────────────────── */
+const Icon = ({ name, size = 18, stroke = 1.5 }) => {
+  const props = {
+    width: size, height: size, viewBox: '0 0 24 24',
+    fill: 'none', stroke: 'currentColor',
+    strokeWidth: stroke, strokeLinecap: 'round', strokeLinejoin: 'round',
+  };
+  switch (name) {
+    case 'mail':
+      return (<svg {...props}><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 7l9 6 9-6"/></svg>);
+    case 'blog':
+      return (<svg {...props}><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>);
+    case 'scholar':
+      return (<svg {...props}><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11v4a5 5 0 0 0 10 0v-4"/><path d="M21 9v4"/></svg>);
+    case 'github':
+      return (<svg {...props}><path d="M9 19c-4 1.2-4-2-6-2"/><path d="M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.7 4.7 0 0 0-1.3-3.3 4.4 4.4 0 0 0-.1-3.3s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 2.6 5.4 2.9 5.4 2.9a4.4 4.4 0 0 0-.1 3.3A4.7 4.7 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>);
+    case 'linkedin':
+      return (<svg {...props}><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 1 1 4 0v4M12 13v4"/></svg>);
+    case 'twitter':
+      return (<svg {...props}><path d="M4 4l7.5 9.5L4.5 20H7l5.5-5.5L16.5 20H20l-7.7-9.7L19.5 4H17l-4.7 5L8.5 4H4z"/></svg>);
+    case 'arrow-up-right':
+      return (<svg {...props}><path d="M7 17L17 7"/><path d="M9 7h8v8"/></svg>);
+    case 'arrow-right':
+      return (<svg {...props}><path d="M5 12h14"/><path d="M13 5l7 7-7 7"/></svg>);
+    case 'menu':
+      return (<svg {...props}><path d="M4 7h16M4 12h16M4 17h16"/></svg>);
+    case 'code':
+      return (<svg {...props}><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/><path d="M13 6l-2 12"/></svg>);
+    case 'layers':
+      return (<svg {...props}><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg>);
+    case 'signal':
+      return (<svg {...props}><path d="M5 13a9 9 0 0 1 14 0"/><path d="M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19" r="1"/></svg>);
+    case 'phone':
+      return (<svg {...props}><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>);
+    case 'flow':
+      return (<svg {...props}><rect x="3" y="4" width="7" height="5" rx="1"/><rect x="14" y="15" width="7" height="5" rx="1"/><path d="M6.5 9v3.5a2 2 0 0 0 2 2H14"/></svg>);
+    case 'cap':
+      return (<svg {...props}><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11v4a5 5 0 0 0 10 0v-4"/></svg>);
+    case 'award':
+      return (<svg {...props}><circle cx="12" cy="9" r="5"/><path d="M9 13.5L7 21l5-3 5 3-2-7.5"/></svg>);
+    case 'shield':
+      return (<svg {...props}><path d="M12 3l8 3v6c0 4.5-3.2 7.5-8 9-4.8-1.5-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>);
+    default: return null;
+  }
+};
+
+/* ── Tech stack → icon mapping ────────────────────────────────── */
+const stackIcon = (name) => {
+  const n = name.toLowerCase();
+  if (n.includes('mqtt') || n.includes('sse') || n.includes('webview')) return 'signal';
+  if (n.includes('flutter')) return 'phone';
+  if (n.includes('flow')) return 'flow';
+  if (n.includes('vue') || n.includes('react') || n.includes('node') || n.includes('sass')) return 'layers';
+  return 'code';
+};
+
+/* ─────────────────────────────────────────────────────────────
+   COMPONENTS
+   ───────────────────────────────────────────────────────────── */
+// 프리로드된 영상(blob URL) 매핑을 하위로 전달
+const VideoContext = React.createContext({});
+
+const VideoBg = ({ src, className = '', poster }) => {
+  const preloaded = React.useContext(VideoContext);
+  const resolved = preloaded[src] || src; // 받아둔 blob 있으면 재사용
+  const ref = React.useRef(null);
+
+  // 어떤 경우에도 소리가 나지 않도록 강제 무음 유지
+  const forceMute = React.useCallback(() => {
+    const v = ref.current;
+    if (!v) return;
+    if (!v.muted) v.muted = true;
+    if (v.volume !== 0) v.volume = 0;
+  }, []);
+
+  React.useEffect(() => {
+    forceMute();
+  }, [forceMute, resolved]);
+
+  return (
+    <video
+      ref={ref}
+      className={className}
+      src={resolved}
+      poster={poster}
+      autoPlay loop muted playsInline preload="auto"
+      onLoadedMetadata={forceMute}
+      onPlay={forceMute}
+      onVolumeChange={forceMute} /* 음소거 해제 시도를 즉시 되돌림 */
+    />
+  );
+};
+
+/* ── 영상 프리로더 ───────────────────────────────────────────────
+   모든 영상을 fetch로 받아 진행률을 계산하고, blob URL로 변환해
+   재다운로드 없이 즉시 재생되도록 한다. file:// 등에서 실패하면
+   원본 src로 안전하게 폴백한다. */
+const usePreloadVideos = (sources) => {
+  const [progress, setProgress] = useState(0);
+  const [done, setDone]         = useState(false);
+  const [map, setMap]           = useState({});
+
+  useEffect(() => {
+    let cancelled = false;
+    const objectUrls = {};
+    const totals = sources.map(() => 0);
+    const loads  = sources.map(() => 0);
+
+    const recompute = () => {
+      const total  = totals.reduce((a, b) => a + b, 0);
+      const loaded = loads.reduce((a, b) => a + b, 0);
+      if (total > 0) setProgress(Math.min(99, Math.round((loaded / total) * 100)));
+    };
+
+    const loadOne = async (src, i) => {
+      try {
+        const res = await fetch(src);
+        if (!res.ok || !res.body) throw new Error('fetch failed');
+        const len = parseInt(res.headers.get('Content-Length') || '0', 10);
+        totals[i] = len;
+        const reader = res.body.getReader();
+        const chunks = [];
+        while (true) {
+          const { done: rDone, value } = await reader.read();
+          if (rDone) break;
+          chunks.push(value);
+          loads[i] += value.length;
+          if (!cancelled) recompute();
+        }
+        if (!totals[i]) { totals[i] = loads[i]; } // Content-Length 없을 때 보정
+        const blob = new Blob(chunks, { type: res.headers.get('Content-Type') || 'video/mp4' });
+        objectUrls[src] = URL.createObjectURL(blob);
+      } catch (e) {
+        objectUrls[src] = src; // 폴백: 원본 주소로 그냥 재생
+      }
+    };
+
+    (async () => {
+      await Promise.all(sources.map(loadOne));
+      if (cancelled) return;
+      setMap(objectUrls);
+      setProgress(100);
+      setDone(true);
+    })();
+
+    return () => {
+      cancelled = true;
+      Object.values(objectUrls).forEach(u => {
+        if (typeof u === 'string' && u.startsWith('blob:')) URL.revokeObjectURL(u);
+      });
+    };
+  }, []);
+
+  return { progress, done, map };
+};
+
+/* ── 로딩 화면 ───────────────────────────────────────────────── */
+const Loader = ({ progress, done }) => (
+  <div
+    className={
+      'fixed inset-0 z-[100] flex flex-col items-center justify-center bg-bg px-8 ' +
+      'transition-opacity duration-700 ' +
+      (done ? 'opacity-0 pointer-events-none' : 'opacity-100')
+    }
+  >
+    <p className="font-grotesk uppercase text-cream text-4xl md:text-6xl tracking-wide mb-2">
+      {PROFILE.name}
+    </p>
+    <p className="font-mono text-[11px] md:text-xs tracking-[0.3em] uppercase text-cream/55 mb-8">
+      LOADING&nbsp;&nbsp;{progress}%
+    </p>
+    <div className="w-full max-w-sm h-[3px] rounded-full bg-white/10 overflow-hidden">
+      <div
+        className="h-full bg-neon transition-[width] duration-200 ease-out"
+        style={{ width: `${progress}%` }}
+      />
+    </div>
+  </div>
+);
+
+const Nav = () => {
+  const [open, setOpen] = useState(false);
+  return (
+    <header className="absolute top-0 left-0 right-0 z-30">
+      <div className="mx-auto max-w-shell px-5 md:px-8 pt-5 md:pt-7 flex items-center gap-4">
+        {/* Logo / name */}
+        <a href="#home" className="font-grotesk text-cream text-2xl md:text-3xl tracking-wide shrink-0">
+          {PROFILE.name}
+        </a>
+
+        {/* Center nav (desktop) */}
+        <nav className="hidden lg:flex flex-1 justify-center">
+          <ul className="liquid-glass rounded-full px-2 py-1.5 flex items-center gap-1">
+            {NAV.map(n => (
+              <li key={n.id}>
+                <a
+                  href={`#${n.id}`}
+                  className="font-grotesk text-cream/90 hover:text-neon transition-colors px-4 py-2 text-sm tracking-[0.18em] inline-block"
+                >
+                  {n.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Social icons (desktop) */}
+        <div className="hidden lg:flex items-center gap-2 shrink-0 ml-auto">
+          {SOCIAL.map(s => (
+            <a
+              key={s.kind}
+              href={s.href}
+              target={s.kind === 'mail' ? undefined : '_blank'}
+              rel={s.kind === 'mail' ? undefined : 'noopener noreferrer'}
+              aria-label={s.label}
+              className="liquid-glass rounded-full w-10 h-10 grid place-items-center text-cream hover:text-neon transition-colors"
+            >
+              <Icon name={s.kind} size={16}/>
+            </a>
+          ))}
+        </div>
+
+        {/* Mobile menu toggle */}
+        <button
+          onClick={() => setOpen(o => !o)}
+          aria-label="Menu"
+          className="lg:hidden ml-auto liquid-glass rounded-full w-10 h-10 grid place-items-center text-cream"
+        >
+          <Icon name="menu" size={18}/>
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      {open && (
+        <div className="lg:hidden mx-5 md:mx-8 mt-3 liquid-glass rounded-2xl p-4">
+          <ul className="flex flex-col gap-1">
+            {NAV.map(n => (
+              <li key={n.id}>
+                <a
+                  href={`#${n.id}`}
+                  onClick={() => setOpen(false)}
+                  className="block font-grotesk text-cream tracking-[0.18em] py-2"
+                >{n.label}</a>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-center gap-2 mt-3 pt-3 border-t border-white/10">
+            {SOCIAL.map(s => (
+              <a
+                key={s.kind}
+                href={s.href}
+                target={s.kind === 'mail' ? undefined : '_blank'}
+                rel={s.kind === 'mail' ? undefined : 'noopener noreferrer'}
+                aria-label={s.label}
+                className="liquid-glass rounded-full w-10 h-10 grid place-items-center text-cream"
+              >
+                <Icon name={s.kind} size={16}/>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
+
+/* ── Section 1: Hero ─────────────────────────────────────────── */
+const Hero = () => (
+  <section id="home" className="relative w-full">
+    {/* Rounded bottom container */}
+    <div className="relative min-h-screen w-full overflow-hidden rounded-b-[28px] md:rounded-b-[44px] flex flex-col">
+      <VideoBg
+        src={VIDEO_HERO}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      {/* Vignette */}
+      <div className="absolute inset-0 bg-gradient-to-b from-bg/60 via-bg/10 to-bg/80"/>
+      <div className="absolute inset-0 bg-gradient-to-r from-bg/40 via-transparent to-bg/40"/>
+
+      <Nav />
+
+      {/* Content flows from top, below navbar */}
+      <div className="relative flex-1 flex items-end">
+        <div className="mx-auto max-w-shell w-full px-5 md:px-8 pt-32 md:pt-36 pb-12 md:pb-16">
+          {/* Accent cursive */}
+          <div className="mb-3 md:mb-5 flex items-center gap-3">
+            <span className="accent-cursive text-2xl md:text-4xl">Portfolio</span>
+            <span className="hidden md:block h-px w-20 bg-cream/30" />
+            <span className="hidden md:block font-mono text-[10px] tracking-[0.3em] text-cream/60 uppercase">
+              {PROFILE.field}
+            </span>
+          </div>
+
+          {/* Heading */}
+          <h1 className="font-grotesk text-cream uppercase heading-tight text-[40px] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[140px]">
+            {HERO_HEADING.map((line, i) => (
+              <span key={i} className="block">{line}</span>
+            ))}
+          </h1>
+
+          {/* Footer row */}
+          <div className="mt-6 md:mt-10 flex flex-wrap items-end justify-between gap-6">
+            <div className="font-mono text-[10px] md:text-[11px] tracking-[0.3em] uppercase text-cream/70 max-w-md">
+              <span className="block text-cream">{PROFILE.role}</span>
+              <span className="block mt-1 text-cream/55">{PROFILE.institution}</span>
+            </div>
+            <a
+              href="#about"
+              className="liquid-glass rounded-full px-5 py-3 flex items-center gap-3 text-cream hover:text-neon transition-colors"
+            >
+              <span className="font-grotesk tracking-[0.22em] text-sm">SCROLL</span>
+              <Icon name="arrow-right" size={16}/>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+/* ── Section 2: About + Experience ───────────────────────────── */
+const ProjectRow = ({ p }) => (
+  <article className="liquid-glass glass-card rounded-2xl p-5 md:p-7 group">
+    <div className="flex items-start gap-4 md:gap-6">
+      <span className="font-grotesk text-neon/80 text-2xl md:text-3xl leading-none shrink-0 pt-0.5">
+        {p.no}
+      </span>
+      <div className="min-w-0 flex-1">
+        <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 md:gap-4">
+          <h3 className="font-grotesk text-cream uppercase tracking-[0.04em] text-[28px] md:text-[34px] leading-tight">
+            {p.title}
+          </h3>
+          <span className="font-mono text-sm md:text-[15px] tracking-[0.2em] text-cream/70 uppercase shrink-0">
+            {p.period}
+          </span>
+        </div>
+        <p className="font-mono text-[15px] tracking-[0.18em] text-neon uppercase mt-2">
+          {p.org}
+        </p>
+        <p className="font-mono text-[15px] md:text-base tracking-[0.04em] text-cream/85 mt-1.5">
+          {p.role}
+        </p>
+        <p className="font-mono text-base md:text-[17px] leading-relaxed text-cream mt-3">
+          {p.desc}
+        </p>
+        <div className="flex flex-wrap gap-2 mt-4">
+          {p.stack.map((s, i) => (
+            <span key={i} className="inline-flex items-center gap-1.5 rounded-full pl-2.5 pr-3 py-1.5 font-mono text-[11px] tracking-[0.2em] uppercase text-cream/90"
+                  style={{ background: 'rgba(255,255,255,0.04)', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.1)' }}>
+              <span className="text-neon/80"><Icon name={stackIcon(s)} size={14} stroke={1.6}/></span>
+              {s}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </article>
+);
+
+const About = () => (
+  <section id="about" className="relative w-full">
+    {/* Fixed cover video behind the whole section */}
+    <div className="sticky top-0 h-screen w-full overflow-hidden -mb-[100vh] pointer-events-none">
+      <VideoBg
+        src={VIDEO_ABOUT}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-bg/85 via-bg/80 to-bg/95"/>
+    </div>
+
+    {/* Foreground content */}
+    <div className="relative">
+      <div className="mx-auto max-w-shell w-full px-5 md:px-8 pt-24 md:pt-32 pb-20 md:pb-32">
+
+        {/* Top row */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          {/* Heading left */}
+          <div className="lg:col-span-7 relative">
+            <h2 className="font-grotesk uppercase text-cream heading-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl">
+              HELLO! I&rsquo;M<br/>
+              <span className="relative inline-block">
+                {PROFILE.shortName.toUpperCase()},
+                <span className="absolute -top-2 -right-3 md:-top-3 md:-right-5 accent-cursive text-3xl md:text-4xl">
+                  Developer
+                </span>
+              </span><br/>
+              <span className="text-cream/75">A BUILDER.</span>
+            </h2>
+          </div>
+
+          {/* Statement right */}
+          <div className="lg:col-span-5 lg:pt-6">
+            <div className="liquid-glass glass-card rounded-2xl p-5 md:p-6">
+              <p className="font-mono text-[11px] tracking-[0.3em] text-cream/50 uppercase mb-3">
+                // PROFILE
+              </p>
+              <p className="font-mono text-base md:text-lg leading-relaxed text-cream">
+                {ABOUT_STATEMENT}
+              </p>
+              <div className="mt-5 pt-5 border-t border-white/10 flex items-center justify-between font-mono text-[10px] tracking-[0.3em] uppercase text-cream/55">
+                <span>FIELD-TESTED</span>
+                <span>{PROFILE.institution}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Experience timeline */}
+        <div className="mt-16 md:mt-24">
+          <div className="flex items-end justify-between gap-4 mb-8 md:mb-10">
+            <h3 className="font-grotesk uppercase text-cream heading-tight text-3xl md:text-5xl lg:text-6xl">
+              SELECTED<br/>
+              <span className="accent-cursive text-3xl md:text-5xl pr-2">work</span>
+              <span className="text-cream/75">HISTORY</span>
+            </h3>
+            <span className="font-mono text-[10px] md:text-[11px] tracking-[0.3em] uppercase text-cream/45 text-right shrink-0">
+              2022 — 2025<br/>8 PROJECTS
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+            {PROJECTS.map((p, i) => <ProjectRow key={i} p={p}/>)}
+          </div>
+        </div>
+
+        {/* Education / Awards / Military */}
+        <div className="mt-16 md:mt-24 grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-5">
+
+          {/* Education */}
+          <div className="lg:col-span-7 liquid-glass glass-card rounded-2xl p-6 md:p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-neon/80"><Icon name="cap" size={20}/></span>
+              <h3 className="font-grotesk uppercase text-cream tracking-[0.06em] text-2xl md:text-3xl">EDUCATION</h3>
+            </div>
+            <div className="flex flex-col gap-5">
+              {EDUCATION.map((e, i) => (
+                <div key={i} className={i > 0 ? 'pt-5 border-t border-white/10' : ''}>
+                  <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 md:gap-4">
+                    <span className="font-grotesk text-cream uppercase tracking-[0.04em] text-2xl md:text-[28px]">{e.school}</span>
+                    <span className="font-mono text-sm md:text-[15px] tracking-[0.2em] text-cream/70 uppercase shrink-0">{e.period}</span>
+                  </div>
+                  <p className="font-mono text-[15px] tracking-[0.16em] text-neon uppercase mt-2">{e.major} · {e.type}</p>
+                  {e.meta.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {e.meta.map((m, j) => (
+                        <span key={j} className="rounded-full px-3 py-1.5 font-mono text-[11px] tracking-[0.18em] uppercase text-cream/90"
+                              style={{ background: 'rgba(255,255,255,0.04)', boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.1)' }}>
+                          {m}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Awards + Military stacked */}
+          <div className="lg:col-span-5 flex flex-col gap-4 md:gap-5">
+
+            {/* Awards */}
+            <div className="liquid-glass glass-card rounded-2xl p-6 md:p-8 flex-1">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-neon/80"><Icon name="award" size={20}/></span>
+                <h3 className="font-grotesk uppercase text-cream tracking-[0.06em] text-2xl md:text-3xl">AWARDS</h3>
+              </div>
+              <div className="flex flex-col gap-4">
+                {AWARDS.map((a, i) => (
+                  <div key={i} className={i > 0 ? 'pt-4 border-t border-white/10' : ''}>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="font-mono text-base md:text-[17px] text-cream leading-snug">{a.title}</span>
+                      <span className="font-mono text-[13px] tracking-[0.2em] text-cream/60 shrink-0">{a.date}</span>
+                    </div>
+                    <p className="font-mono text-sm tracking-[0.18em] text-cream/70 uppercase mt-1.5">{a.org}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Military */}
+            <div className="liquid-glass glass-card rounded-2xl p-6 md:p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-neon/80"><Icon name="shield" size={20}/></span>
+                <h3 className="font-grotesk uppercase text-cream tracking-[0.06em] text-2xl md:text-3xl">MILITARY</h3>
+              </div>
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="font-grotesk text-cream uppercase tracking-[0.04em] text-2xl">{MILITARY.status}</span>
+                <span className="font-mono text-sm tracking-[0.2em] text-cream/70 shrink-0">{MILITARY.period}</span>
+              </div>
+              <p className="font-mono text-[15px] tracking-[0.18em] text-neon uppercase mt-2">{MILITARY.detail}</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+);
+
+/* ── Section 3: Featured Work Grid ───────────────────────────── */
+const FeaturedCard = ({ card }) => (
+  <a
+    href={card.link}
+    aria-label={`Open ${card.title} portfolio`}
+    className="liquid-glass rounded-2xl overflow-hidden flex flex-col group block no-underline"
+  >
+    <div className="relative aspect-square overflow-hidden">
+      <VideoBg
+        src={card.video}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-bg/70 via-transparent to-transparent"/>
+
+      {/* Top tag */}
+      <div className="absolute top-4 left-4 right-4 flex items-start justify-between">
+        <span className="liquid-glass rounded-full px-3 py-1 font-mono text-[10px] tracking-[0.3em] uppercase text-cream">
+          {card.tag}
+        </span>
+      </div>
+
+      {/* Title */}
+      <div className="absolute left-4 right-4 bottom-20 md:bottom-24">
+        <h3 className="font-grotesk text-cream uppercase heading-tight text-3xl md:text-4xl">
+          {card.title}
+        </h3>
+      </div>
+
+      {/* Bottom overlay bar */}
+      <div className="absolute left-3 right-3 bottom-3 liquid-glass rounded-xl px-4 py-3 flex items-center justify-between">
+        <div className="min-w-0">
+          <p className="font-mono text-[9px] tracking-[0.3em] uppercase text-cream/55">{card.label}</p>
+          <p className="font-grotesk text-cream uppercase tracking-[0.06em] text-base md:text-lg truncate">
+            {card.value}
+          </p>
+        </div>
+        <span
+          className="shrink-0 w-10 h-10 rounded-full grid place-items-center text-cream group-hover:text-neon transition-colors"
+          style={{ background: 'rgba(111,255,0,0.12)', boxShadow: 'inset 0 0 0 1px rgba(111,255,0,0.35)' }}
+        >
+          <Icon name="arrow-up-right" size={16} stroke={2}/>
+        </span>
+      </div>
+    </div>
+  </a>
+);
+
+const Featured = () => (
+  <section id="research" className="relative w-full bg-bg">
+    <div className="mx-auto max-w-shell w-full px-5 md:px-8 py-20 md:py-32">
+
+      {/* Header row */}
+      <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 mb-12 md:mb-20">
+        <div>
+          <p className="font-mono text-[11px] tracking-[0.3em] text-cream/55 uppercase mb-4">
+            // 03 — WHAT I DO
+          </p>
+          <h2 className="font-grotesk uppercase heading-tight text-cream text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl">
+            <span className="block">WHAT</span>
+            <span className="block">
+              <span className="accent-cursive text-4xl md:text-6xl lg:text-7xl align-middle pr-3">i</span>
+              DO.
+            </span>
+          </h2>
+        </div>
+
+        <a
+          href="#contact"
+          className="self-start lg:self-end inline-flex items-center gap-3 group shrink-0"
+        >
+          <span className="font-grotesk text-cream uppercase text-2xl md:text-3xl tracking-[0.06em] neon-underline px-1">
+            VIEW FULL CV
+          </span>
+          <span className="liquid-glass w-12 h-12 rounded-full grid place-items-center text-cream group-hover:text-neon transition-colors">
+            <Icon name="arrow-up-right" size={18}/>
+          </span>
+        </a>
+      </div>
+
+      {/* Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        {FEATURED.map((c, i) => <FeaturedCard key={i} card={c}/>)}
+      </div>
+
+      {/* Footer index numbers */}
+      <div className="mt-12 grid grid-cols-3 gap-5 md:gap-6 font-mono text-[10px] tracking-[0.3em] uppercase text-cream/40">
+        <span>01 / DESIGN</span>
+        <span>02 / PLAN</span>
+        <span>03 / BUILD</span>
+      </div>
+    </div>
+  </section>
+);
+
+/* ── Section 4: Final CTA ────────────────────────────────────── */
+const CONTACT_EMAIL = 'ducks0413@naver.com';
+
+const MESSAGE_MIN = 10;
+
+const validateContact = ({ name, from, message }) => {
+  const errors = {};
+  if (!name.trim()) {
+    errors.name = '이름을 입력해주세요.';
+  }
+  if (!from.trim()) {
+    errors.from = '이메일을 입력해주세요.';
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from.trim())) {
+    errors.from = '정상적인 이메일을 작성해주세요.';
+  }
+  if (message.trim().length < MESSAGE_MIN) {
+    errors.message = `내용을 ${MESSAGE_MIN}글자 이상 작성해주세요.`;
+  }
+  return errors;
+};
+
+const ContactForm = () => {
+  const [name, setName]       = useState('');
+  const [from, setFrom]       = useState('');
+  const [message, setMessage] = useState('');
+  const [status, setStatus]   = useState('idle'); // idle | sending | success | error
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errors, setErrors]   = useState({}); // { name, from, message }
+
+  // 입력값을 고치면 해당 항목의 에러를 즉시 해제
+  const clearError = (key) =>
+    setErrors(prev => (prev[key] ? { ...prev, [key]: undefined } : prev));
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (status === 'sending') return;
+
+    const found = validateContact({ name, from, message });
+    if (Object.keys(found).length > 0) {
+      setErrors(found);
+      setStatus('idle');
+      setErrorMsg('');
+      return;
+    }
+    setErrors({});
+
+    setStatus('sending');
+    setErrorMsg('');
+    try {
+      const res = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, from, message }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || '전송에 실패했습니다.');
+      setStatus('success');
+      setName(''); setFrom(''); setMessage('');
+    } catch (err) {
+      setStatus('error');
+      setErrorMsg(err.message || '전송 중 오류가 발생했습니다.');
+    }
+  };
+
+  const field =
+    'w-full bg-bg/70 rounded-xl px-5 py-4 font-mono text-xl md:text-2xl font-bold text-white placeholder:text-white/55 placeholder:font-normal ' +
+    'outline-none focus:bg-bg/85 transition-colors';
+  const fieldStyle      = { boxShadow: 'inset 0 0 0 1.5px rgba(255,255,255,0.3)' };
+  const fieldErrorStyle = { boxShadow: 'inset 0 0 0 1.5px rgba(248,113,113,0.9)' };
+  const errorText = 'font-mono text-xs md:text-sm tracking-[0.08em] text-red-400 -mt-3 ml-1';
+
+  return (
+    <form onSubmit={submit} noValidate className="liquid-glass glass-card rounded-2xl p-8 md:p-12 flex flex-col gap-5">
+      <p className="font-mono text-base md:text-lg tracking-[0.3em] text-white/75 uppercase mb-1">
+        // SEND A MESSAGE
+      </p>
+      <input
+        className={field} style={errors.name ? fieldErrorStyle : fieldStyle}
+        type="text" placeholder="이름" value={name}
+        onChange={e => { setName(e.target.value); clearError('name'); }}
+        aria-invalid={!!errors.name}
+      />
+      {errors.name && <p className={errorText}>{errors.name}</p>}
+      <input
+        className={field} style={errors.from ? fieldErrorStyle : fieldStyle}
+        type="email" placeholder="회신받을 이메일" value={from}
+        onChange={e => { setFrom(e.target.value); clearError('from'); }}
+        aria-invalid={!!errors.from}
+      />
+      {errors.from && <p className={errorText}>{errors.from}</p>}
+      <textarea
+        className={field + ' resize-none leading-relaxed'} style={errors.message ? fieldErrorStyle : fieldStyle}
+        rows={4} placeholder="내용을 입력하세요 (10글자 이상)" value={message}
+        onChange={e => { setMessage(e.target.value); clearError('message'); }}
+        aria-invalid={!!errors.message}
+      />
+      {errors.message && <p className={errorText}>{errors.message}</p>}
+      <button
+        type="submit"
+        disabled={status === 'sending'}
+        className="mt-1 rounded-full py-4 md:py-5 inline-flex items-center justify-center gap-3 text-white font-grotesk font-bold tracking-[0.2em] text-2xl md:text-3xl transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100 disabled:cursor-not-allowed"
+        style={{ background: 'rgba(255,255,255,0.08)', boxShadow: 'inset 0 0 0 2px rgba(255,255,255,0.5)' }}
+      >
+        {status === 'sending' ? '보내는 중…' : '보내기'}
+        {status !== 'sending' && <Icon name="arrow-up-right" size={26} stroke={2.4}/>}
+      </button>
+      {status === 'success' ? (
+        <p className="font-mono text-sm md:text-base tracking-[0.16em] text-neon text-center mt-1">
+          ✓ 메시지가 전송되었습니다. 감사합니다!
+        </p>
+      ) : status === 'error' ? (
+        <p className="font-mono text-sm md:text-base tracking-[0.16em] text-red-400 text-center mt-1">
+          ✗ {errorMsg}
+        </p>
+      ) : (
+        <p className="font-mono text-sm md:text-base tracking-[0.16em] text-white/65 text-center mt-1">
+          {CONTACT_EMAIL} 로 전송됩니다
+        </p>
+      )}
+    </form>
+  );
+};
+
+const FinalCTA = () => (
+  <section id="contact" className="relative w-full bg-bg pb-12 md:pb-16">
+    <div className="mx-auto max-w-shell w-full px-5 md:px-8">
+      <div className="relative w-full overflow-hidden rounded-[24px] md:rounded-[36px]">
+
+        {/* Video as cover background (responsive: fills the whole card at any height) */}
+        <div className="absolute inset-0">
+          <VideoBg
+            src={VIDEO_CTA}
+            className="w-full h-full object-cover"
+          />
+          {/* dark overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-bg/55 to-bg/65 pointer-events-none"/>
+        </div>
+
+        {/* Top-right small marker */}
+        <div className="absolute top-5 right-5 md:top-8 md:right-8 z-10 liquid-glass rounded-full px-4 py-2">
+          <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-cream/85">
+            04 / CONTACT
+          </span>
+        </div>
+
+        {/* Content in normal flow → container grows to fit on every screen */}
+        <div className="relative z-10 px-5 py-16 sm:px-8 sm:py-20 md:px-12 lg:px-20 lg:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+            {/* Left: heading */}
+            <div className="lg:col-span-5">
+              <p className="accent-cursive text-3xl md:text-5xl lg:text-6xl mb-3 md:mb-5">
+                Let&rsquo;s connect
+              </p>
+              <h2 className="font-grotesk uppercase heading-tight text-cream text-4xl sm:text-5xl md:text-6xl lg:text-7xl max-w-[12ch]">
+                SEE THE WORK.<br/>
+                LET&rsquo;S BUILD<br/>
+                <span className="text-cream/80">SOMETHING.</span>
+              </h2>
+            </div>
+
+            {/* Right: contact form */}
+            <div className="lg:col-span-7 w-full">
+              <ContactForm />
+            </div>
+
+          </div>
+        </div>
+
+        {/* Bottom-left vertical icon stack (desktop only — avoids overlapping the form on mobile) */}
+        <div className="hidden lg:block absolute bottom-8 left-8 z-10">
+          <div className="liquid-glass rounded-full p-1.5 flex flex-col gap-1">
+            {SOCIAL.map(s => (
+              <a
+                key={s.kind}
+                href={s.href}
+                target={s.kind === 'mail' ? undefined : '_blank'}
+                rel={s.kind === 'mail' ? undefined : 'noopener noreferrer'}
+                aria-label={s.label}
+                className="w-10 h-10 md:w-11 md:h-11 rounded-full grid place-items-center text-cream hover:text-neon transition-colors"
+              >
+                <Icon name={s.kind} size={15}/>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="mt-10 md:mt-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 font-mono text-[10px] tracking-[0.3em] uppercase text-cream/45">
+        <span>© {new Date().getFullYear()} {PROFILE.name} · ALL RIGHTS RESERVED</span>
+        <span>{PROFILE.institution}</span>
+        <span className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-neon"/> AVAILABLE FOR COLLABORATION
+        </span>
+      </footer>
+    </div>
+  </section>
+);
+
+/* ── App ──────────────────────────────────────────────────────── */
+const VIDEO_SOURCES = [
+  VIDEO_HERO, VIDEO_ABOUT, VIDEO_CTA,
+  ...FEATURED.map(f => f.video),
+];
+
+const App = () => {
+  const { progress, done, map } = usePreloadVideos(VIDEO_SOURCES);
+  return (
+    <>
+      <Loader progress={progress} done={done} />
+      {done && (
+        <VideoContext.Provider value={map}>
+          <main className="relative fade-in">
+            <Hero />
+            <About />
+            <Featured />
+            <FinalCTA />
+          </main>
+        </VideoContext.Provider>
+      )}
+    </>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+</script>
+</body>
+</html>
