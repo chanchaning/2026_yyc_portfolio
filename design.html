@@ -13,7 +13,13 @@
   tailwind.config = {
     theme: {
       extend: {
-        colors: { bg: '#010828', cream: '#EFF4FF', neon: '#6FFF00' },
+        colors: {
+          /* 베이지 톤 팔레트 */
+          paper: '#EDE4D3',   // 배경 베이지
+          sand:  '#E3D7C0',   // 카드 베이지
+          ink:   '#1A1714',   // 검정 글씨
+          clay:  '#8A6F4E',   // 포인트(브라운)
+        },
         fontFamily: {
           grotesk:   ['Anton', 'PyeojinGothic', 'Impact', 'sans-serif'],
           condiment: ['Condiment', 'cursive'],
@@ -26,71 +32,250 @@
 </script>
 
 <link rel="stylesheet" href="assets/css/style.css" />
+
+<style>
+  /* ── 베이지 톤 스크롤바 (Firefox) ── */
+  html { scrollbar-color: #C7B58E #EDE4D3; scrollbar-width: thin; }
+  /* ── 베이지 톤 스크롤바 (Chrome/Safari/Edge) ── */
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: #EDE4D3; }
+  ::-webkit-scrollbar-thumb {
+    background: #C7B58E;
+    border-radius: 9999px;
+    border: 3px solid #EDE4D3;   /* 트랙과 같은 색 테두리로 얇아 보이게 */
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #8A6F4E; }
+
+  /* ── 이 페이지 한정 베이지 테마 (공유 CSS는 그대로 두고 오버라이드) ── */
+  body.design-beige { background: #EDE4D3; color: #1A1714; }
+
+  /* 전역 노이즈 오버레이가 베이지를 너무 밝게 날리지 않도록 약하게 */
+  body.design-beige .texture-overlay { mix-blend-mode: multiply; opacity: 0.18; }
+
+  /* 모달 열렸을 땐 노이즈 텍스처 끔 (영상 뒤 지지직 방지) */
+  body.modal-open .texture-overlay { display: none; }
+
+  /* 베이지 카드 — 다크용 liquid-glass 대신 사용 */
+  .beige-card {
+    background: #E3D7C0;
+    border: 1px solid rgba(26,23,20,0.12);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 10px 30px rgba(120,95,60,0.10);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 자세히보기 모달 */
+  .detail-modal {
+    position: fixed; inset: 0; z-index: 80;
+    display: none;
+    background: rgba(26,23,20,0.55);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .detail-modal.open { display: block; }
+  .detail-scroll {
+    position: absolute; inset: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 5rem 1rem 4rem;
+  }
+  .detail-sheet {
+    margin: 0 auto; max-width: 860px;
+    background: #EDE4D3;
+    border-radius: 16px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    overflow: hidden;
+  }
+  .detail-sheet img { display: block; width: 100%; height: auto; }
+  .detail-close {
+    position: fixed; top: 1rem; right: 1rem; z-index: 90;
+    background: #1A1714; color: #EDE4D3;
+    border-radius: 9999px;
+    width: 44px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 20px; line-height: 1; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+</style>
 </head>
 
-<body class="bg-bg text-cream overflow-x-hidden">
+<body class="design-beige bg-paper text-ink overflow-x-hidden">
 
 <div class="texture-overlay"></div>
 
 <!-- Back nav -->
 <header class="sticky top-0 z-40 px-5 md:px-8 py-4">
   <div class="mx-auto max-w-shell w-full flex items-center justify-between">
-    <a href="Portfolio.html" class="liquid-glass rounded-full inline-flex items-center gap-2 pl-3 pr-4 py-2 text-cream hover:text-neon transition-colors no-underline">
+    <a href="Portfolio.html" class="beige-card rounded-full inline-flex items-center gap-2 pl-3 pr-4 py-2 text-ink hover:text-clay transition-colors no-underline">
       <span class="font-mono text-lg leading-none">←</span>
       <span class="font-mono text-[11px] tracking-[0.3em] uppercase">Back</span>
     </a>
-    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-cream/55">ROLE 01 / DESIGN</span>
+    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-ink/55">ROLE 01 / DESIGN</span>
   </div>
 </header>
 
 <!-- Hero -->
 <main class="mx-auto max-w-shell w-full px-5 md:px-8">
   <section class="py-20 md:py-32">
-    <p class="font-mono text-[11px] tracking-[0.3em] text-cream/55 uppercase mb-6">// UI · UX · BRAND</p>
-    <h1 class="font-grotesk uppercase heading-tight text-cream text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
+    <p class="font-mono text-[11px] tracking-[0.3em] text-ink/55 uppercase mb-6">// UI · UX · BRAND</p>
+    <h1 class="font-grotesk uppercase heading-tight text-ink text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
       <span class="block">PRODUCT</span>
-      <span class="block"><span class="accent-cursive text-5xl md:text-7xl align-middle pr-3">design</span></span>
+      <span class="block"><span class="accent-cursive text-clay text-5xl md:text-7xl align-middle pr-3">design</span></span>
     </h1>
-    <p class="mt-8 max-w-2xl text-cream/70 leading-relaxed">
+    <p class="mt-8 max-w-2xl text-ink/70 leading-relaxed">
       산업 현장을 이해하는 디자이너의 시선으로 만든 인터페이스와 브랜드 작업물을 모았습니다.
       현장과 스크린 사이의 간극을 좁히는, ‘진짜로 작동하는’ 디자인을 지향합니다.
     </p>
   </section>
 
-  <!-- Placeholder project grid -->
+  <!-- Project grid -->
   <section class="pb-28">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-      <article class="liquid-glass rounded-2xl p-6 aspect-[4/5] flex flex-col justify-between">
-        <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-cream/55">PROJECT 01</span>
-        <div>
-          <h3 class="font-grotesk text-cream uppercase text-3xl">COMING SOON</h3>
-          <p class="mt-2 text-cream/60 text-sm">작업물을 곧 업로드할 예정입니다.</p>
+
+      <!-- PROJECT 01 — 제12회 공간디자인대전 특선작 -->
+      <article class="beige-card rounded-2xl overflow-hidden aspect-[4/5] flex flex-col group">
+        <div class="relative flex-1 overflow-hidden">
+          <img src="assets/images/internidecoration/%EC%A0%9C%EC%95%88%EC%84%9C%201.jpg"
+               alt="제12회 공간디자인대전 특선작 표지"
+               class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent"></div>
+          <span class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.3em] uppercase text-paper">PROJECT 01</span>
+        </div>
+        <div class="p-6 bg-sand">
+          <p class="font-mono text-[10px] tracking-[0.25em] uppercase text-clay mb-1">공간디자인 · INTERIOR</p>
+          <h3 class="font-grotesk text-ink uppercase text-2xl leading-tight">제12회 공간디자인대전 특선작</h3>
+          <button type="button"
+                  class="mt-4 inline-flex items-center gap-2 rounded-full bg-ink text-paper px-4 py-2 font-mono text-[11px] tracking-[0.25em] uppercase hover:bg-clay transition-colors"
+                  onclick="openDetail('interni')">
+            자세히보기 <span class="text-base leading-none">→</span>
+          </button>
         </div>
       </article>
-      <article class="liquid-glass rounded-2xl p-6 aspect-[4/5] flex flex-col justify-between">
-        <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-cream/55">PROJECT 02</span>
-        <div>
-          <h3 class="font-grotesk text-cream uppercase text-3xl">COMING SOON</h3>
-          <p class="mt-2 text-cream/60 text-sm">작업물을 곧 업로드할 예정입니다.</p>
+
+      <!-- PROJECT 02 — 한국 비주얼머천다이징 협회 VMD 공모전 입선 -->
+      <article class="beige-card rounded-2xl overflow-hidden aspect-[4/5] flex flex-col group">
+        <div class="relative flex-1 overflow-hidden">
+          <img src="assets/images/vmd/vmd.jpg"
+               alt="한국 비주얼머천다이징 협회 VMD 공모전 입선"
+               class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent"></div>
+          <span class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.3em] uppercase text-paper">PROJECT 02</span>
+        </div>
+        <div class="p-6 bg-sand">
+          <p class="font-mono text-[10px] tracking-[0.25em] uppercase text-clay mb-1">VMD · VISUAL MERCHANDISING</p>
+          <h3 class="font-grotesk text-ink uppercase text-2xl leading-tight">한국 비주얼머천다이징 협회 VMD 공모전 입선</h3>
+          <button type="button"
+                  class="mt-4 inline-flex items-center gap-2 rounded-full bg-ink text-paper px-4 py-2 font-mono text-[11px] tracking-[0.25em] uppercase hover:bg-clay transition-colors"
+                  onclick="openDetail('vmd')">
+            자세히보기 <span class="text-base leading-none">→</span>
+          </button>
         </div>
       </article>
-      <article class="liquid-glass rounded-2xl p-6 aspect-[4/5] flex flex-col justify-between">
-        <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-cream/55">PROJECT 03</span>
-        <div>
-          <h3 class="font-grotesk text-cream uppercase text-3xl">COMING SOON</h3>
-          <p class="mt-2 text-cream/60 text-sm">작업물을 곧 업로드할 예정입니다.</p>
+
+      <!-- PROJECT 03 — 해양경찰청 UCC 공모전 우수상 (YouTube) -->
+      <article class="beige-card rounded-2xl overflow-hidden aspect-[4/5] flex flex-col group">
+        <div class="relative flex-1 overflow-hidden">
+          <img src="https://img.youtube.com/vi/6P-qVmCY0RM/hqdefault.jpg"
+               alt="해양경찰청 UCC 공모전 우수상"
+               class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent"></div>
+          <span class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.3em] uppercase text-paper">PROJECT 03</span>
+          <!-- 재생 아이콘 -->
+          <span class="absolute inset-0 flex items-center justify-center">
+            <span class="flex items-center justify-center w-14 h-14 rounded-full bg-paper/90 text-ink text-xl pl-1 shadow-lg group-hover:scale-110 transition-transform">▶</span>
+          </span>
+        </div>
+        <div class="p-6 bg-sand">
+          <p class="font-mono text-[10px] tracking-[0.25em] uppercase text-clay mb-1">UCC · VIDEO</p>
+          <h3 class="font-grotesk text-ink uppercase text-2xl leading-tight">해양경찰청 UCC 공모전 우수상</h3>
+          <button type="button"
+                  class="mt-4 inline-flex items-center gap-2 rounded-full bg-ink text-paper px-4 py-2 font-mono text-[11px] tracking-[0.25em] uppercase hover:bg-clay transition-colors"
+                  onclick="openDetail('ucc')">
+            자세히보기 <span class="text-base leading-none">→</span>
+          </button>
         </div>
       </article>
+
     </div>
   </section>
 </main>
 
-<footer class="px-5 md:px-8 py-10 border-t border-white/10">
+<footer class="px-5 md:px-8 py-10 border-t border-ink/10">
   <div class="mx-auto max-w-shell w-full flex items-center justify-between">
-    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-cream/40">© YOON YEOCHAN</span>
-    <a href="Portfolio.html" class="font-mono text-[11px] tracking-[0.3em] uppercase text-cream/70 hover:text-neon transition-colors no-underline">← Portfolio</a>
+    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-ink/40">© YOON YEOCHAN</span>
+    <a href="Portfolio.html" class="font-mono text-[11px] tracking-[0.3em] uppercase text-ink/70 hover:text-clay transition-colors no-underline">← Portfolio</a>
   </div>
 </footer>
+
+<!-- 자세히보기 모달 -->
+<div id="detailModal" class="detail-modal" onclick="if(event.target===this) closeDetail()">
+  <button class="detail-close" onclick="closeDetail()" aria-label="닫기">✕</button>
+  <div class="detail-scroll">
+    <div class="detail-sheet" id="detailSheet"><!-- 이미지 JS로 주입 --></div>
+  </div>
+</div>
+
+<script>
+  // 프로젝트별 자세히보기 이미지 정의
+  var PROJECTS = {
+    interni: {
+      title: '제12회 공간디자인대전 특선작',
+      // 제안서 1~12 (1번이 표지)
+      images: (function () {
+        var arr = [];
+        for (var i = 1; i <= 12; i++) {
+          arr.push('assets/images/internidecoration/' + encodeURIComponent('제안서 ' + i + '.jpg'));
+        }
+        return arr;
+      })(),
+    },
+    vmd: {
+      title: '한국 비주얼머천다이징 협회 VMD 공모전 입선',
+      images: ['assets/images/vmd/vmd.jpg'],
+    },
+    ucc: {
+      title: '해양경찰청 UCC 공모전 우수상',
+      youtube: '6P-qVmCY0RM',
+    },
+  };
+
+  function openDetail(key) {
+    var project = PROJECTS[key];
+    if (!project) return;
+    var sheet = document.getElementById('detailSheet');
+
+    if (project.youtube) {
+      // 유튜브 영상 임베드 (16:9 반응형)
+      sheet.innerHTML =
+        '<div style="position:relative;width:100%;padding-top:56.25%;background:#000;">' +
+          '<iframe style="position:absolute;inset:0;width:100%;height:100%;border:0;" ' +
+            'src="https://www.youtube.com/embed/' + project.youtube + '?rel=0&autoplay=1" ' +
+            'title="' + project.title + '" allowfullscreen ' +
+            'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>' +
+        '</div>';
+    } else {
+      var total = project.images.length;
+      sheet.innerHTML = project.images.map(function (src, idx) {
+        return '<img loading="lazy" src="' + src + '" alt="' + project.title + ' ' + (idx + 1) + '/' + total + '" />';
+      }).join('');
+    }
+
+    var m = document.getElementById('detailModal');
+    m.classList.add('open');
+    document.body.classList.add('modal-open');
+    document.body.style.overflow = 'hidden';
+    m.querySelector('.detail-scroll').scrollTop = 0;
+  }
+  function closeDetail() {
+    document.getElementById('detailModal').classList.remove('open');
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
+    // 영상/이미지 정리 — 닫으면 유튜브 소리도 멈춤
+    document.getElementById('detailSheet').innerHTML = '';
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDetail();
+  });
+</script>
 
 </body>
 </html>

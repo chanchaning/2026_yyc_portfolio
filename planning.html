@@ -13,7 +13,13 @@
   tailwind.config = {
     theme: {
       extend: {
-        colors: { bg: '#010828', cream: '#EFF4FF', neon: '#6FFF00' },
+        colors: {
+          /* 베이지 톤 팔레트 (design.html과 동일) */
+          paper: '#EDE4D3',
+          sand:  '#E3D7C0',
+          ink:   '#1A1714',
+          clay:  '#8A6F4E',
+        },
         fontFamily: {
           grotesk:   ['Anton', 'PyeojinGothic', 'Impact', 'sans-serif'],
           condiment: ['Condiment', 'cursive'],
@@ -26,71 +32,245 @@
 </script>
 
 <link rel="stylesheet" href="assets/css/style.css" />
+
+<style>
+  /* ── 베이지 톤 스크롤바 (Firefox) ── */
+  html { scrollbar-color: #C7B58E #EDE4D3; scrollbar-width: thin; }
+  /* ── 베이지 톤 스크롤바 (Chrome/Safari/Edge) ── */
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: #EDE4D3; }
+  ::-webkit-scrollbar-thumb {
+    background: #C7B58E;
+    border-radius: 9999px;
+    border: 3px solid #EDE4D3;   /* 트랙과 같은 색 테두리로 얇아 보이게 */
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #8A6F4E; }
+
+  /* ── 이 페이지 한정 베이지 테마 (공유 CSS는 그대로 두고 오버라이드) ── */
+  body.design-beige { background: #EDE4D3; color: #1A1714; }
+  body.design-beige .texture-overlay { mix-blend-mode: multiply; opacity: 0.18; }
+  body.modal-open .texture-overlay { display: none; }
+
+  .beige-card {
+    background: #E3D7C0;
+    border: 1px solid rgba(26,23,20,0.12);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 10px 30px rgba(120,95,60,0.10);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 어키 앱 카드용 타이포 커버 (이미지 없이 디자인) */
+  .pdf-cover {
+    background:
+      radial-gradient(120% 80% at 50% 0%, #F4ECDC 0%, #E3D7C0 60%, #D9CAAF 100%);
+  }
+
+  /* 자세히보기 모달 */
+  .detail-modal {
+    position: fixed; inset: 0; z-index: 80;
+    display: none;
+    background: rgba(26,23,20,0.55);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .detail-modal.open { display: block; }
+  .detail-scroll {
+    position: absolute; inset: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 5rem 1rem 4rem;
+  }
+  .detail-sheet {
+    margin: 0 auto; max-width: 860px;
+    background: #EDE4D3;
+    border-radius: 16px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    overflow: hidden;
+  }
+  .detail-sheet img { display: block; width: 100%; height: auto; }
+  .detail-close {
+    position: fixed; top: 1rem; right: 1rem; z-index: 90;
+    background: #1A1714; color: #EDE4D3;
+    border-radius: 9999px;
+    width: 44px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 20px; line-height: 1; cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+</style>
 </head>
 
-<body class="bg-bg text-cream overflow-x-hidden">
+<body class="design-beige bg-paper text-ink overflow-x-hidden">
 
 <div class="texture-overlay"></div>
 
 <!-- Back nav -->
 <header class="sticky top-0 z-40 px-5 md:px-8 py-4">
   <div class="mx-auto max-w-shell w-full flex items-center justify-between">
-    <a href="Portfolio.html" class="liquid-glass rounded-full inline-flex items-center gap-2 pl-3 pr-4 py-2 text-cream hover:text-neon transition-colors no-underline">
+    <a href="Portfolio.html" class="beige-card rounded-full inline-flex items-center gap-2 pl-3 pr-4 py-2 text-ink hover:text-clay transition-colors no-underline">
       <span class="font-mono text-lg leading-none">←</span>
       <span class="font-mono text-[11px] tracking-[0.3em] uppercase">Back</span>
     </a>
-    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-cream/55">ROLE 02 / PLANNING</span>
+    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-ink/55">ROLE 02 / PLANNING</span>
   </div>
 </header>
 
 <!-- Hero -->
 <main class="mx-auto max-w-shell w-full px-5 md:px-8">
   <section class="py-20 md:py-32">
-    <p class="font-mono text-[11px] tracking-[0.3em] text-cream/55 uppercase mb-6">// PRODUCT · STRATEGY</p>
-    <h1 class="font-grotesk uppercase heading-tight text-cream text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
+    <p class="font-mono text-[11px] tracking-[0.3em] text-ink/55 uppercase mb-6">// PRODUCT · STRATEGY</p>
+    <h1 class="font-grotesk uppercase heading-tight text-ink text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
       <span class="block">PRODUCT</span>
-      <span class="block"><span class="accent-cursive text-5xl md:text-7xl align-middle pr-3">planning</span></span>
+      <span class="block"><span class="accent-cursive text-clay text-5xl md:text-7xl align-middle pr-3">planning</span></span>
     </h1>
-    <p class="mt-8 max-w-2xl text-cream/70 leading-relaxed">
+    <p class="mt-8 max-w-2xl text-ink/70 leading-relaxed">
       현장의 문제를 정의하고, 해결의 우선순위를 세우는 기획 작업물을 모았습니다.
       실제 작업이 이루어지는 그곳에서 ‘진짜로 작동하는’ 소프트웨어를 기획합니다.
     </p>
   </section>
 
-  <!-- Placeholder project grid -->
+  <!-- Project grid -->
   <section class="pb-28">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-      <article class="liquid-glass rounded-2xl p-6 aspect-[4/5] flex flex-col justify-between">
-        <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-cream/55">PROJECT 01</span>
-        <div>
-          <h3 class="font-grotesk text-cream uppercase text-3xl">COMING SOON</h3>
-          <p class="mt-2 text-cream/60 text-sm">작업물을 곧 업로드할 예정입니다.</p>
+
+      <!-- PROJECT 01 — 어키(Aki) 반려동물 커뮤니티 앱 -->
+      <article class="beige-card rounded-2xl overflow-hidden aspect-[4/5] flex flex-col group">
+        <div class="pdf-cover relative flex-1 flex flex-col items-center justify-center text-center px-6">
+          <span class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.3em] uppercase text-ink/45">PROJECT 01</span>
+          <span class="text-5xl mb-3">🐾</span>
+          <h3 class="font-grotesk text-ink uppercase text-5xl leading-none">AKI</h3>
+          <p class="mt-2 font-mono text-[11px] tracking-[0.3em] uppercase text-clay">PET COMMUNITY APP</p>
+        </div>
+        <div class="p-6 bg-sand">
+          <p class="font-mono text-[10px] tracking-[0.25em] uppercase text-clay mb-1">APP · 기획서</p>
+          <h3 class="font-grotesk text-ink uppercase text-2xl leading-tight">어키 — 반려동물 커뮤니티 앱</h3>
+          <p class="mt-2 text-ink/65 text-sm leading-relaxed">
+            반려동물 보호자들이 일상과 정보를 나누고, 가까운 이웃·전문가와 연결되는 커뮤니티 앱 ‘어키(Aki)’의 서비스 기획안입니다.
+          </p>
+          <button type="button"
+                  class="mt-4 inline-flex items-center gap-2 rounded-full bg-ink text-paper px-4 py-2 font-mono text-[11px] tracking-[0.25em] uppercase hover:bg-clay transition-colors"
+                  onclick="openDetail('aki')">
+            자세히보기 <span class="text-base leading-none">→</span>
+          </button>
         </div>
       </article>
-      <article class="liquid-glass rounded-2xl p-6 aspect-[4/5] flex flex-col justify-between">
-        <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-cream/55">PROJECT 02</span>
-        <div>
-          <h3 class="font-grotesk text-cream uppercase text-3xl">COMING SOON</h3>
-          <p class="mt-2 text-cream/60 text-sm">작업물을 곧 업로드할 예정입니다.</p>
+
+      <!-- PROJECT 02 — 헬스왕 곽대장 (Figma, 운동 관리 앱) -->
+      <article class="beige-card rounded-2xl overflow-hidden aspect-[4/5] flex flex-col group">
+        <div class="pdf-cover relative flex-1 flex flex-col items-center justify-center text-center px-6">
+          <span class="absolute top-4 left-4 font-mono text-[10px] tracking-[0.3em] uppercase text-ink/45">PROJECT 02</span>
+          <span class="text-5xl mb-3">🏋️</span>
+          <h3 class="font-grotesk text-ink uppercase text-4xl leading-none">헬스왕<br/>곽대장</h3>
+          <p class="mt-3 font-mono text-[11px] tracking-[0.3em] uppercase text-clay">WORKOUT APP</p>
+        </div>
+        <div class="p-6 bg-sand">
+          <p class="font-mono text-[10px] tracking-[0.25em] uppercase text-clay mb-1">APP · FIGMA</p>
+          <h3 class="font-grotesk text-ink uppercase text-2xl leading-tight">헬스왕 곽대장 — 운동 관리 앱</h3>
+          <p class="mt-2 text-ink/65 text-sm leading-relaxed">
+            운동 루틴과 기록을 관리하고 동기부여를 돕는 운동 관리 앱 ‘헬스왕 곽대장’의 UI/프로토타입입니다.
+          </p>
+          <button type="button"
+                  class="mt-4 inline-flex items-center gap-2 rounded-full bg-ink text-paper px-4 py-2 font-mono text-[11px] tracking-[0.25em] uppercase hover:bg-clay transition-colors"
+                  onclick="openDetail('health')">
+            자세히보기 <span class="text-base leading-none">→</span>
+          </button>
         </div>
       </article>
-      <article class="liquid-glass rounded-2xl p-6 aspect-[4/5] flex flex-col justify-between">
-        <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-cream/55">PROJECT 03</span>
-        <div>
-          <h3 class="font-grotesk text-cream uppercase text-3xl">COMING SOON</h3>
-          <p class="mt-2 text-cream/60 text-sm">작업물을 곧 업로드할 예정입니다.</p>
-        </div>
+
+      <!-- 그 외 작업 — 텍스트 리스트 -->
+      <article class="beige-card rounded-2xl p-7 md:p-8 flex flex-col">
+        <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-clay">SELECTED WORKS</span>
+        <h3 class="font-grotesk text-ink uppercase text-2xl mt-1 mb-6">그 외 기획 작업</h3>
+        <ul class="flex flex-col">
+          <li class="flex items-baseline gap-4 py-4 border-t border-ink/12">
+            <span class="font-mono text-[11px] text-ink/40 leading-relaxed">03</span>
+            <span class="text-ink text-base md:text-lg leading-snug">울랄라랩 Sales 영업 관리 시스템</span>
+          </li>
+          <li class="flex items-baseline gap-4 py-4 border-t border-ink/12">
+            <span class="font-mono text-[11px] text-ink/40 leading-relaxed">04</span>
+            <span class="text-ink text-base md:text-lg leading-snug">울랄라랩 Tool &amp; Works 화면 기획</span>
+          </li>
+          <li class="flex items-baseline gap-4 py-4 border-t border-ink/12">
+            <span class="font-mono text-[11px] text-ink/40 leading-relaxed">05</span>
+            <span class="text-ink text-base md:text-lg leading-snug">Aviewer 도면 관리 시스템</span>
+          </li>
+          <li class="flex items-baseline gap-4 py-4 border-t border-b border-ink/12">
+            <span class="font-mono text-[11px] text-ink/40 leading-relaxed">06</span>
+            <span class="text-ink text-base md:text-lg leading-snug">현장 날씨 관리 어플리케이션</span>
+          </li>
+        </ul>
       </article>
+
     </div>
   </section>
 </main>
 
-<footer class="px-5 md:px-8 py-10 border-t border-white/10">
+<footer class="px-5 md:px-8 py-10 border-t border-ink/10">
   <div class="mx-auto max-w-shell w-full flex items-center justify-between">
-    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-cream/40">© YOON YEOCHAN</span>
-    <a href="Portfolio.html" class="font-mono text-[11px] tracking-[0.3em] uppercase text-cream/70 hover:text-neon transition-colors no-underline">← Portfolio</a>
+    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-ink/40">© YOON YEOCHAN</span>
+    <a href="Portfolio.html" class="font-mono text-[11px] tracking-[0.3em] uppercase text-ink/70 hover:text-clay transition-colors no-underline">← Portfolio</a>
   </div>
 </footer>
+
+<!-- 자세히보기 모달 -->
+<div id="detailModal" class="detail-modal" onclick="if(event.target===this) closeDetail()">
+  <button class="detail-close" onclick="closeDetail()" aria-label="닫기">✕</button>
+  <div class="detail-scroll">
+    <div class="detail-sheet" id="detailSheet"><!-- 콘텐츠 JS로 주입 --></div>
+  </div>
+</div>
+
+<script>
+  var PROJECTS = {
+    aki: {
+      title: '어키 — 반려동물 커뮤니티 앱',
+      pdf: 'assets/pdf/aki.pdf',
+    },
+    health: {
+      title: '헬스왕 곽대장 — 운동 관리 앱',
+      figma: 'https://www.figma.com/design/5sYWUz1LqmGiNAhgonoHpm/%ED%97%AC%EC%8A%A4%EC%99%95-%EA%B3%BD%EB%8C%80%ED%91%9C?node-id=140-2&t=ZWll5L398MS7SS1N-1',
+    },
+  };
+
+  function openDetail(key) {
+    var project = PROJECTS[key];
+    if (!project) return;
+    var sheet = document.getElementById('detailSheet');
+
+    if (project.pdf) {
+      // PDF 기획서 임베드
+      sheet.innerHTML =
+        '<iframe src="' + project.pdf + '#view=FitH" title="' + project.title + '" ' +
+          'style="width:100%;height:85vh;border:0;background:#fff;"></iframe>';
+    } else if (project.figma) {
+      // Figma 뷰어 임베드
+      sheet.innerHTML =
+        '<iframe title="' + project.title + '" ' +
+          'src="https://www.figma.com/embed?embed_host=share&url=' + encodeURIComponent(project.figma) + '" ' +
+          'style="width:100%;height:85vh;border:0;background:#fff;" allowfullscreen></iframe>';
+    } else if (project.images) {
+      var total = project.images.length;
+      sheet.innerHTML = project.images.map(function (src, idx) {
+        return '<img loading="lazy" src="' + src + '" alt="' + project.title + ' ' + (idx + 1) + '/' + total + '" />';
+      }).join('');
+    }
+
+    var m = document.getElementById('detailModal');
+    m.classList.add('open');
+    document.body.classList.add('modal-open');
+    document.body.style.overflow = 'hidden';
+    m.querySelector('.detail-scroll').scrollTop = 0;
+  }
+
+  function closeDetail() {
+    document.getElementById('detailModal').classList.remove('open');
+    document.body.classList.remove('modal-open');
+    document.body.style.overflow = '';
+    document.getElementById('detailSheet').innerHTML = '';
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDetail();
+  });
+</script>
 
 </body>
 </html>

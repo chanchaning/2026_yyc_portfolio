@@ -33,6 +33,19 @@
 
 <link rel="stylesheet" href="assets/css/style.css" />
 
+<style>
+  /* ── 배경 톤에 맞춘 스크롤바 (다크 네이비 + 네온) ── */
+  html { scrollbar-color: #4A63A8 #010828; scrollbar-width: thin; }
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: #010828; }
+  ::-webkit-scrollbar-thumb {
+    background: #4A63A8;
+    border-radius: 9999px;
+    border: 3px solid #010828;   /* 트랙색 테두리로 얇게 */
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #6FFF00; }
+</style>
+
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
@@ -1049,6 +1062,22 @@ const App = () => {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
+
+// 다른 페이지에서 Portfolio.html#contact 등으로 진입 시,
+// React 렌더가 끝난 뒤 해당 섹션으로 스크롤 (요소가 생길 때까지 잠깐 대기)
+(function scrollToHashAfterRender() {
+  var id = (location.hash || '').replace('#', '');
+  if (!id) return;
+  var tries = 0;
+  (function attempt() {
+    var el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else if (tries++ < 40) {
+      requestAnimationFrame(attempt); // 최대 ~40프레임 동안 요소 등장 대기
+    }
+  })();
+})();
 </script>
 </body>
 </html>

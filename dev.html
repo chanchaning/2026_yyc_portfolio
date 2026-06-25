@@ -13,7 +13,13 @@
   tailwind.config = {
     theme: {
       extend: {
-        colors: { bg: '#010828', cream: '#EFF4FF', neon: '#6FFF00' },
+        colors: {
+          /* 베이지 톤 팔레트 (design/planning과 동일) */
+          paper: '#EDE4D3',
+          sand:  '#E3D7C0',
+          ink:   '#1A1714',
+          clay:  '#8A6F4E',
+        },
         fontFamily: {
           grotesk:   ['Anton', 'PyeojinGothic', 'Impact', 'sans-serif'],
           condiment: ['Condiment', 'cursive'],
@@ -26,69 +32,112 @@
 </script>
 
 <link rel="stylesheet" href="assets/css/style.css" />
+
+<style>
+  /* ── 베이지 톤 스크롤바 (Firefox) ── */
+  html { scrollbar-color: #C7B58E #EDE4D3; scrollbar-width: thin; }
+  /* ── 베이지 톤 스크롤바 (Chrome/Safari/Edge) ── */
+  ::-webkit-scrollbar { width: 12px; height: 12px; }
+  ::-webkit-scrollbar-track { background: #EDE4D3; }
+  ::-webkit-scrollbar-thumb {
+    background: #C7B58E;
+    border-radius: 9999px;
+    border: 3px solid #EDE4D3;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: #8A6F4E; }
+
+  /* ── 이 페이지 한정 베이지 테마 (공유 CSS는 그대로 두고 오버라이드) ── */
+  body.design-beige { background: #EDE4D3; color: #1A1714; }
+  body.design-beige .texture-overlay { mix-blend-mode: multiply; opacity: 0.18; }
+
+  .beige-card {
+    background: #E3D7C0;
+    border: 1px solid rgba(26,23,20,0.12);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 10px 30px rgba(120,95,60,0.10);
+    position: relative;
+    overflow: hidden;
+  }
+</style>
 </head>
 
-<body class="bg-bg text-cream overflow-x-hidden">
+<body class="design-beige bg-paper text-ink overflow-x-hidden">
 
 <div class="texture-overlay"></div>
 
 <!-- Back nav -->
 <header class="sticky top-0 z-40 px-5 md:px-8 py-4">
   <div class="mx-auto max-w-shell w-full flex items-center justify-between">
-    <a href="Portfolio.html" class="liquid-glass rounded-full inline-flex items-center gap-2 pl-3 pr-4 py-2 text-cream hover:text-neon transition-colors no-underline">
+    <a href="Portfolio.html" class="beige-card rounded-full inline-flex items-center gap-2 pl-3 pr-4 py-2 text-ink hover:text-clay transition-colors no-underline">
       <span class="font-mono text-lg leading-none">←</span>
       <span class="font-mono text-[11px] tracking-[0.3em] uppercase">Back</span>
     </a>
-    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-cream/55">ROLE 03 / DEVELOPMENT</span>
+    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-ink/55">ROLE 03 / DEVELOPMENT</span>
   </div>
 </header>
 
-<!-- Hero -->
+<!-- Hero + 보안 안내 (좌우 배치) -->
 <main class="mx-auto max-w-shell w-full px-5 md:px-8">
-  <section class="py-20 md:py-32">
-    <p class="font-mono text-[11px] tracking-[0.3em] text-cream/55 uppercase mb-6">// FRONTEND · FIELD</p>
-    <h1 class="font-grotesk uppercase heading-tight text-cream text-6xl sm:text-7xl md:text-8xl lg:text-9xl">
-      <span class="block">SHIPPING</span>
-      <span class="block"><span class="accent-cursive text-5xl md:text-7xl align-middle pr-3">code</span></span>
-    </h1>
-    <p class="mt-8 max-w-2xl text-cream/70 leading-relaxed">
-      FE 아키텍처 설계부터 AI/IoT 통합 인터페이스까지, 현장에서 실제로 쓰이는 소프트웨어를 구축한 개발 작업물을 모았습니다.
-      React, Flutter, 실시간 데이터 파이프라인 등으로 ‘진짜로 작동하는’ 제품을 만듭니다.
-    </p>
-  </section>
+  <section class="py-20 md:py-28">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-  <!-- Placeholder project grid -->
-  <section class="pb-28">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-      <article class="liquid-glass rounded-2xl p-6 aspect-[4/5] flex flex-col justify-between">
-        <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-cream/55">PROJECT 01</span>
-        <div>
-          <h3 class="font-grotesk text-cream uppercase text-3xl">COMING SOON</h3>
-          <p class="mt-2 text-cream/60 text-sm">작업물을 곧 업로드할 예정입니다.</p>
+      <!-- 좌: 히어로 -->
+      <div>
+        <p class="font-mono text-[11px] tracking-[0.3em] text-ink/55 uppercase mb-6">// FRONTEND · FIELD</p>
+        <h1 class="font-grotesk uppercase heading-tight text-ink text-6xl sm:text-7xl md:text-8xl">
+          <span class="block">SHIPPING</span>
+          <span class="block"><span class="accent-cursive text-clay text-5xl md:text-7xl align-middle pr-3">code</span></span>
+        </h1>
+        <p class="mt-8 max-w-xl text-ink/70 leading-relaxed">
+          FE 아키텍처 설계부터 AI/IoT 통합 인터페이스까지, 현장에서 실제로 쓰이는 소프트웨어를 구축한 개발 작업물을 모았습니다.
+          React, Flutter, 실시간 데이터 파이프라인 등으로 ‘진짜로 작동하는’ 제품을 만듭니다.
+        </p>
+      </div>
+
+      <!-- 우: 보안 계약 안내 -->
+      <article class="beige-card rounded-3xl p-8 md:p-12">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="grid place-items-center w-11 h-11 rounded-full bg-ink text-paper text-lg shrink-0">🔒</span>
+          <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-clay">CONFIDENTIAL · 비공개 안내</span>
+        </div>
+        <h2 class="font-grotesk uppercase text-ink heading-tight text-3xl md:text-5xl mb-7">
+          UNDER <span class="text-clay">NDA</span>
+        </h2>
+
+        <div class="space-y-5 text-ink/80 text-[15px] md:text-base leading-relaxed">
+          <p>
+            제가 참여한 주요 프로젝트들은 전 직장 및 파트너사와의 <strong class="text-ink font-semibold">대외비(보안) 계약 조항</strong>으로 인해
+            온라인상에 상세히 공개하거나 파일로 공유해 드리지 못하는 점 양해 부탁드립니다.
+          </p>
+          <p>
+            하지만 사이트에 담지 못한 저의 <strong class="text-ink font-semibold">기술적 역량과 컴포넌트 설계, 트러블슈팅 경험</strong>을
+            더 자세히 소개해 드리고 싶습니다. 하단의 연락처로 별도 요청을 주시면, 귀사에 직접 방문하여
+            포트폴리오를 공유하고 프레젠테이션하는 자리를 갖고자 합니다.
+          </p>
+          <p>
+            언제든 편하게 연락해 주시면 감사하겠습니다. <span class="text-clay">함께 발전할 수 있는 좋은 기회를 기대합니다.</span>
+          </p>
+        </div>
+
+        <div class="mt-8 pt-7 border-t border-ink/12 flex flex-col sm:flex-row gap-3 sm:items-center">
+          <a href="Portfolio.html#contact"
+             class="inline-flex items-center justify-center gap-2 rounded-full bg-ink text-paper px-6 py-3 font-mono text-[11px] tracking-[0.25em] uppercase hover:bg-clay transition-colors no-underline">
+            연락하기 <span class="text-base leading-none">→</span>
+          </a>
+          <a href="mailto:ducks0413@naver.com"
+             class="inline-flex items-center justify-center gap-2 rounded-full border border-ink/25 text-ink px-5 py-3 font-mono text-[11px] tracking-[0.2em] uppercase hover:border-clay hover:text-clay transition-colors no-underline">
+            ducks0413@naver.com
+          </a>
         </div>
       </article>
-      <article class="liquid-glass rounded-2xl p-6 aspect-[4/5] flex flex-col justify-between">
-        <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-cream/55">PROJECT 02</span>
-        <div>
-          <h3 class="font-grotesk text-cream uppercase text-3xl">COMING SOON</h3>
-          <p class="mt-2 text-cream/60 text-sm">작업물을 곧 업로드할 예정입니다.</p>
-        </div>
-      </article>
-      <article class="liquid-glass rounded-2xl p-6 aspect-[4/5] flex flex-col justify-between">
-        <span class="font-mono text-[10px] tracking-[0.3em] uppercase text-cream/55">PROJECT 03</span>
-        <div>
-          <h3 class="font-grotesk text-cream uppercase text-3xl">COMING SOON</h3>
-          <p class="mt-2 text-cream/60 text-sm">작업물을 곧 업로드할 예정입니다.</p>
-        </div>
-      </article>
+
     </div>
   </section>
 </main>
 
-<footer class="px-5 md:px-8 py-10 border-t border-white/10">
+<footer class="px-5 md:px-8 py-10 border-t border-ink/10">
   <div class="mx-auto max-w-shell w-full flex items-center justify-between">
-    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-cream/40">© YOON YEOCHAN</span>
-    <a href="Portfolio.html" class="font-mono text-[11px] tracking-[0.3em] uppercase text-cream/70 hover:text-neon transition-colors no-underline">← Portfolio</a>
+    <span class="font-mono text-[11px] tracking-[0.3em] uppercase text-ink/40">© YOON YEOCHAN</span>
+    <a href="Portfolio.html" class="font-mono text-[11px] tracking-[0.3em] uppercase text-ink/70 hover:text-clay transition-colors no-underline">← Portfolio</a>
   </div>
 </footer>
 
