@@ -25,72 +25,7 @@
   };
 </script>
 
-<style>
-  @font-face {
-    font-family: 'PyeojinGothic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Light.woff2') format('woff2');
-    font-weight: 300; font-display: swap;
-  }
-  @font-face {
-    font-family: 'PyeojinGothic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Regular.woff2') format('woff2');
-    font-weight: 400; font-display: swap;
-  }
-  @font-face {
-    font-family: 'PyeojinGothic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2504-1@1.0/PyeojinGothic-Bold.woff2') format('woff2');
-    font-weight: 700; font-display: swap;
-  }
-  html, body { background: #010828; color: #EFF4FF; }
-  body { font-family: 'JetBrains Mono', 'PyeojinGothic', ui-monospace, monospace; -webkit-font-smoothing: antialiased; }
-  html { scroll-behavior: smooth; }
-
-  .liquid-glass {
-    background: rgba(255, 255, 255, 0.01);
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border: none;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-  }
-  .liquid-glass::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1.4px;
-    background: linear-gradient(
-      180deg,
-      rgba(255,255,255,0.45) 0%,
-      rgba(255,255,255,0.15) 20%,
-      rgba(255,255,255,0)    40%,
-      rgba(255,255,255,0)    60%,
-      rgba(255,255,255,0.15) 80%,
-      rgba(255,255,255,0.45) 100%
-    );
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-            mask-composite: exclude;
-    pointer-events: none;
-  }
-
-  .texture-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    pointer-events: none;
-    background-image: url('https://www.transparenttextures.com/patterns/noisy.png');
-    background-size: cover;
-    mix-blend-mode: lighten;
-    opacity: 0.6;
-  }
-
-  .heading-tight { line-height: 0.92; letter-spacing: 0.005em; }
-  .accent-cursive { color: #6FFF00; font-family: 'Condiment', cursive; font-weight: 400; }
-  ::selection { background: #6FFF00; color: #010828; }
-</style>
+<link rel="stylesheet" href="assets/css/style.css" />
 </head>
 
 <body class="bg-bg text-cream overflow-x-hidden">

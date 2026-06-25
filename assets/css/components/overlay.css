@@ -1,0 +1,13 @@
+/* ============================================================
+   Texture Overlay — 전역 노이즈 텍스처 레이어
+   ============================================================ */
+.texture-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  background-image: url('https://www.transparenttextures.com/patterns/noisy.png');
+  background-size: cover;
+  mix-blend-mode: lighten;
+  opacity: 0.6;
+}

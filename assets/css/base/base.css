@@ -1,0 +1,22 @@
+/* ============================================================
+   Base — 전역 요소 스타일 (가장 낮은 우선순위)
+   ============================================================ */
+html, body {
+  background: #010828;
+  color: #EFF4FF;
+}
+
+body {
+  font-family: 'JetBrains Mono', 'PyeojinGothic', ui-monospace, monospace;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 네비게이션 부드러운 스크롤 */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: #6FFF00;
+  color: #010828;
+}

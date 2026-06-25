@@ -1,0 +1,29 @@
+/* ============================================================
+   Utilities — 단일 목적 헬퍼 클래스
+   ============================================================ */
+.heading-tight {
+  line-height: 0.92;
+  letter-spacing: 0.005em;
+}
+
+.accent-cursive {
+  color: #6FFF00;
+  font-family: 'Condiment', cursive;
+  font-weight: 400;
+}
+
+.neon-underline {
+  background: linear-gradient(180deg, transparent 60%, #6FFF00 60%, #6FFF00 80%, transparent 80%);
+}
+
+/* 마퀴용 흐린 텍스트 */
+.faint-row {
+  color: rgba(239, 244, 255, 0.06);
+  font-family: 'Anton', Impact, sans-serif;
+  white-space: nowrap;
+}
+
+/* 네비 알약(pill) 스크롤바 숨김 */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
